@@ -146,6 +146,9 @@ if($action == 'faq') {
 	exit;
 
 } elseif($action == 'grouppermission') {
+	
+	
+	$gids = array();
 
 	require_once './include/forum.func.php';
 	require_once language('misc');
