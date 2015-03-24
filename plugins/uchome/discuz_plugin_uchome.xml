@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[7.2]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[UCHome 動態]]></item>
+			<item id="identifier"><![CDATA[uchome]]></item>
+			<item id="description"><![CDATA[]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[uchome/]]></item>
+			<item id="copyright"><![CDATA[Comsenz Inc.]]></item>
+			<item id="version"><![CDATA[1.0.0]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[admincp]]></item>
+					<item id="menu"><![CDATA[設置]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[1]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+				</item>
+				<item id="1">
+					<item id="name"><![CDATA[plugin]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[7.2]]></item>
+		<item id="intro"><![CDATA[通過 UCenter Home，建站者可以輕鬆構建一個以好友關係為核心的交流網絡，讓站點用戶可以用迷你博客一句話記錄生活中的點點滴滴；方便快捷地發佈日誌、上傳圖片；更可以十分方便的與其好友們一起分享信息、討論感興趣的話題；輕鬆快捷地瞭解好友最新動態。]]></item>
+		<item id="language">
+			<item id="scriptlang">
+				<item id="settings_uc_feed"><![CDATA[將那種類型的帖子加入到 UCenter Home 的動態:]]></item>
+				<item id="settings_uc_feed_comment"><![CDATA[如果有人發起、回復或者參與選中類型的主題，這個動作將會發佈到 UCenter Home ，顯示到 UCenter Home 的站點動態。如果不選「回復主題」，那麼只有發起主題的動作發佈到 UCenter Home。]]></item>
+				<item id="settings_uc_feed_thread"><![CDATA[普通主題]]></item>
+				<item id="settings_uc_feed_sepcialthread"><![CDATA[特殊主題]]></item>
+				<item id="settings_uc_feed_reply"><![CDATA[回復主題]]></item>
+				<item id="settings_uc_home_show"><![CDATA[在下列哪些頁面展示 UCenter Home 的信息:]]></item>
+				<item id="settings_uc_home_show_comment"><![CDATA[頭像區域和個人資料頁面顯示某一個會員在 UCenter Home 的個人動態。<br />帖子下方廣告是在每個帖子下方，顯示 UCenter Home 的全站動態，當且僅當帖子下方廣告位空閒時才會顯示 UCenter Home 的動態。]]></item>
+				<item id="settings_uc_home_avatarshow"><![CDATA[帖子頁面的頭像區域]]></item>
+				<item id="settings_uc_home_viewproshow"><![CDATA[個人資料頁]]></item>
+				<item id="settings_uc_home_adshow"><![CDATA[帖子下方廣告]]></item>
+				<item id="settings_uc_home_side"><![CDATA[邊欄]]></item>
+				<item id="settings_uc_home_nonexistence"><![CDATA[您尚未安裝 UCenter Home 程序, 無法進行設置 <br /><br />想要瞭解或者安裝 UCenter Home, <a href="http://www.comsenz.com/products/uchome" target="_blank">請點擊這裡進入我們的產品庫</a>]]></item>
+				<item id="settings_uc_home_allowfeed"><![CDATA[允許發佈 UCenter Home 動態的版塊:]]></item>
+				<item id="settings_uc_home_allowfeed_comment"><![CDATA[設置允許發佈 UCenter Home 動態的版塊，可以按住 CTRL 多選]]></item>
+			</item>
+		</item>
+	</item>
+</root>

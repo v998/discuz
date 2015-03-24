@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[7.2]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[首頁多格]]></item>
+			<item id="identifier"><![CDATA[homegrids]]></item>
+			<item id="description"><![CDATA[]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[homegrids/]]></item>
+			<item id="copyright"><![CDATA[Comsenz Inc.]]></item>
+			<item id="version"><![CDATA[1.0.0]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[homegrids]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[7.2]]></item>
+		<item id="vars">
+			<item id="0">
+				<item id="displayorder"><![CDATA[0]]></item>
+				<item id="title"><![CDATA[多格模塊]]></item>
+				<item id="description"><![CDATA[一行一個模塊數據，格式「類型,模塊名稱,模塊標題,寬度,高度」
+類型：A、圖片模塊，B、頁簽模塊，C、自定義模塊
+模塊名稱：論壇數據調用中相應模塊的名稱
+模塊標題：模塊頭部顯示的標題
+寬度：模塊的寬度(對A、C類型有效)
+高度：模塊的高度(僅對A類型有效)]]></item>
+				<item id="variable"><![CDATA[modules]]></item>
+				<item id="type"><![CDATA[textarea]]></item>
+				<item id="value"><![CDATA[A,首頁多格_圖片,最新圖片,300,200
+B,首頁多格_熱門主題,熱門主題
+B,首頁多格_最新主題,最新主題
+B,首頁多格_最新回復,最新回復]]></item>
+				<item id="extra"><![CDATA[]]></item>
+			</item>
+		</item>
+		<item id="intro"><![CDATA[以數據調用為核心的首頁多格插件，包含圖片模塊、頁簽模塊以及自定義模塊，同時支持 IE8 的「網頁快訊」功能。]]></item>
+		<item id="uninstallfile"><![CDATA[uninstall.php]]></item>
+		<item id="importfile">
+			<item id="request"><![CDATA[discuz_request_homegrids.xml]]></item>
+		</item>
+		<item id="language">
+			<item id="installlang">
+				<item id="requestpre"><![CDATA[首頁多格_]]></item>
+			</item>
+			<item id="templatelang">
+				<item id="hslice_title"><![CDATA[{$GLOBALS[bbname]}動態]]></item>
+				<item id="hslice_entrylink"><![CDATA[進入{$GLOBALS[bbname]}]]></item>
+			</item>
+		</item>
+	</item>
+</root>

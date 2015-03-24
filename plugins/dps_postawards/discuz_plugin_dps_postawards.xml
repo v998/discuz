@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[7.2]]></item>
+	<item id="Time"><![CDATA[2009-11-26 00:00]]></item>
+	<item id="From"><![CDATA[DPS (http://www.7dps.com/)]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[樓層獎懲]]></item>
+			<item id="identifier"><![CDATA[dps_postawards]]></item>
+			<item id="description"><![CDATA[]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[dps_postawards/]]></item>
+			<item id="copyright"><![CDATA[Comsenz Inc. & DPS]]></item>
+			<item id="version"><![CDATA[1.0.0]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[admin]]></item>
+					<item id="menu"><![CDATA[權限設置]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[1]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+				</item>
+				<item id="1">
+					<item id="name"><![CDATA[postawards]]></item>
+					<item id="type"><![CDATA[11]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+				</item>
+				<item id="2">
+					<item id="name"><![CDATA[postawards]]></item>
+					<item id="type"><![CDATA[13]]></item>
+					<item id="adminid"><![CDATA[1]]></item>
+					<item id="displayorder"><![CDATA[0]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[7.2]]></item>
+		<item id="language">
+			<item id="scriptlang">
+				<item id="wrong_request"><![CDATA[錯誤的請求，請返回檢查你的來路]]></item>
+				<item id="msg_no_reply"><![CDATA[本帖沒有回復，請選擇有回復的帖子進行操作]]></item>
+				<item id="msg_parameter_empty"><![CDATA[獎勵數量或獎勵類型錯誤，請返回補全必要的參數]]></item>
+				<item id="msg_awardpost_empty"><![CDATA[請填寫需要獎勵的樓層]]></item>
+				<item id="msg_awardpost_error"><![CDATA[獎勵範圍錯誤，請返回重新輸入]]></item>
+				<item id="msg_awardpost_overrange"><![CDATA[獎勵範圍超出最大樓層數，請返回重新輸入]]></item>
+				<item id="msg_credit_over_limit"><![CDATA[超出系統獎勵允許的範圍]]></item>
+				<item id="msg_credit_all_limit"><![CDATA[超過獎勵總數允許的範圍]]></item>
+				<item id="msg_credittype_error"><![CDATA[獎勵的積分類型錯誤，請返回重新輸入]]></item>
+				<item id="msg_over_user_credit"><![CDATA[獎勵積分超出自身積分]]></item>
+				<item id="msg_ratereason_empty"><![CDATA[請輸入評分理由]]></item>
+				<item id="msg_not_allow"><![CDATA[你沒有權限]]></item>
+				<item id="pm_message"><![CDATA[<div class=\"f_manage\">您在帖子 <a href=\"{boardurl}viewthread.php?from=notice&tid={$thread[tid]}\">{$thread[subject]}</a> 的回復中獲得了 $awardmsg 的獎勵 {time}
+<fieldset><ins>{$rate_msg}</ins></fieldset></div>]]></item>
+				<item id="success"><![CDATA[操作成功 ]]></item>
+				<item id="group_setting"><![CDATA[用戶組權限設置]]></item>
+				<item id="groupname"><![CDATA[用戶組]]></item>
+				<item id="allow_postawards"><![CDATA[允許使用樓層獎勵]]></item>
+				<item id="allow_systemcredit"><![CDATA[允許使用系統積分]]></item>
+				<item id="allow_systemcredit_low"><![CDATA[單次評分下限]]></item>
+				<item id="allow_systemcredit_high"><![CDATA[單次評分上限]]></item>
+				<item id="allow_systemcredit_all"><![CDATA[單次評分總數]]></item>
+				<item id="allow_ratemode"><![CDATA[允許批量評分]]></item>
+				<item id="tips"><![CDATA[<li>允許使用系統積分：由系統提供獎懲的積分</li><li>單次評分下限/上限/總數：它是對「允許使用系統積分」的數值設置。</li><li>允許批量評分：對Discuz!現有評分功能增加「批量」功能，其相關設置如「重複評分/下限/上限」請參考Discuz!評分相關設置</li><li>關於下限/上限/總數參數：下限「-數字」，上限直接填寫數字，「0」為禁止操作，留空為不限。</li><li>關於樓層獎懲：該功能僅是管理組可使用，並在帖內的「主題管理」中可查看並操作。</li>]]></item>
+			</item>
+			<item id="templatelang">
+				<item id="dps_postawards"><![CDATA[樓層獎勵]]></item>
+				<item id="dps_postawards_nolink"><![CDATA[樓層獎懲]]></item>
+				<item id="post_count"><![CDATA[本帖子共有 $replycount 樓]]></item>
+				<item id="award"><![CDATA[獎懲]]></item>
+				<item id="number"><![CDATA[第]]></item>
+				<item id="floor"><![CDATA[樓]]></item>
+				<item id="sendmsg"><![CDATA[給用戶發送通知]]></item>
+				<item id="paward_success"><![CDATA[樓層獎懲操作成功！]]></item>
+				<item id="awardcredittype"><![CDATA[獎懲積分]]></item>
+				<item id="awardcreditnum"><![CDATA[獎懲數量]]></item>
+				<item id="msg_intro_credit"><![CDATA[指定輸入：2,9,10<br>連續輸入：2-7<br>判斷式輸入：?7,?2,7??,?7?<br>組合式輸入：2-7,3,7,9-20,30-44,?7]]></item>
+				<item id="self_credit_mode"><![CDATA[以自己的積分獎懲]]></item>
+				<item id="system_credit_mode"><![CDATA[使用系統積分獎懲]]></item>
+				<item id="credit_mode"><![CDATA[獎懲來源]]></item>
+				<item id="rate_mode"><![CDATA[批量評分]]></item>
+			</item>
+		</item>
+		<item id="installfile"><![CDATA[install.php]]></item>
+		<item id="uninstallfile"><![CDATA[uninstall.php]]></item>
+		<item id="intro"><![CDATA[版權所有 (C) 2009-2010, 7DPS.COM 保留所有權利
+插件開發者: [url=http://bbs.7dps.com/space-uid-22.html]LuciferSheng[/url]
+
+此插件能對主題回復的用戶進行批量或指定樓層評分或獎勵，特別適用於活動帖、T樓等批量獎勵。
+
+使用問題/BUG反饋請到: [url]http://bbs.7dps.com[/url]
+Discuz!問題推薦到DRC求助: [url]http://bbs.7drc.com[/url]]]></item>
+		<item id="license"><![CDATA[版權所有 (C) 2009-2010, 7DPS.COM 保留所有權利
+
+感謝您選擇 DPS 系列產品，希望我們的努力能為您擁有更多時間關注網站運營。
+
+DPS 英文全稱為 Discuz! Product Support，中文全稱為 Discuz! 產品支持。
+
+點擊同意表示您接受協議 ([url=http://bbs.7dps.com/thread-156-1-1.html]請點擊這裡閱讀[/url])，否則請點擊取消。]]></item>
+	</item>
+</root>
