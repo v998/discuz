@@ -58,10 +58,12 @@ if($dberrno == 1114) {
 	$errmsg .= "<b>Time</b>: ".gmdate("Y-n-j g:ia", $timestamp + ($GLOBALS['timeoffset'] * 3600))."\n";
 	$errmsg .= "<b>Script</b>: ".$GLOBALS['PHP_SELF']."\n\n";
 	if($sql) {
-		$errmsg .= "<b>SQL</b>: ".htmlspecialchars($sql)."\n";
+		//$errmsg .= "<b>SQL</b>: ".htmlspecialchars($sql)."\n";
+		$errmsg .= "<b>SQL</b>: Not displayed for security reasons\n";
 	}
-	$errmsg .= "<b>Error</b>:  $dberror\n";
-	$errmsg .= "<b>Errno.</b>:  $dberrno";
+	$errmsg .= "Database error";
+	//$errmsg .= "<b>Error</b>:  $dberror\n";
+	//$errmsg .= "<b>Errno.</b>:  $dberrno";
 
 	echo "</table></table></table></table></table>\n";
 	echo "<p style=\"font-family: Verdana, Tahoma; font-size: 11px; background: #FFFFFF;\">";
