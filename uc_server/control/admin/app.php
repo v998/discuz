@@ -1,10 +1,10 @@
 <?php
 
 /*
-	[UCenter] (C)2001-2009 Comsenz Inc.
+	[UCenter] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
-	$Id: app.php 894 2008-12-23 02:40:17Z monkey $
+	$Id: app.php 1090 2011-05-03 07:33:28Z cnteacher $
 */
 
 !defined('IN_UC') && exit('Access Denied');
@@ -57,7 +57,7 @@ class control extends adminbase {
 
 			$a = getgpc('a');
 			$this->view->assign('a', $a);
-			$typelist = array('UCHOME'=>'UCenter Home','XSPACE'=>'X-Space','DISCUZ'=>'Discuz!','SUPESITE'=>'SupeSite','SUPEV'=>'SupeV','ECSHOP'=>'ECShop','ECMALL'=>'ECMall','OTHER'=>$this->lang['other']);
+			$typelist = array('DISCUZX'=>'DiscuzX','UCHOME'=>'UCenter Home','XSPACE'=>'X-Space','DISCUZ'=>'Discuz!','SUPESITE'=>'SupeSite','SUPEV'=>'SupeV','ECSHOP'=>'ECShop','ECMALL'=>'ECMall','OTHER'=>$this->lang['other']);
 			$this->view->assign('typelist', $typelist);
 			$this->view->display('admin_app');
 		} else {
@@ -71,6 +71,7 @@ class control extends adminbase {
 			$synlogin = getgpc('synlogin', 'P');
 			$recvnote = getgpc('recvnote', 'P');
 			$apifilename = trim(getgpc('apifilename', 'P'));
+			//$allowips = getgpc('allowips', 'P');
 
 			$tagtemplates = array();
 			$tagtemplates['template'] = getgpc('tagtemplates', 'P');
@@ -92,11 +93,13 @@ class control extends adminbase {
 			}
 			$app = $this->db->result_first("SELECT COUNT(*) FROM ".UC_DBTABLEPRE."applications WHERE name='$name'");
 			if($app) {
-				$this->db->query("UPDATE ".UC_DBTABLEPRE."applications SET name='$name', url='$url', ip='$ip', viewprourl='$viewprourl', apifilename='$apifilename', authkey='$authkey', synlogin='$synlogin', type='$type', tagtemplates='$tagtemplates' WHERE appid='$app[appid]'");
-				$appid = $app['appid'];
+				$this->message('app_add_name_invalid', 'BACK');
 			} else {
 				$extra = serialize(array('apppath'=> getgpc('apppath', 'P')));
-				$this->db->query("INSERT INTO ".UC_DBTABLEPRE."applications SET name='$name', url='$url', ip='$ip', viewprourl='$viewprourl', apifilename='$apifilename', authkey='$authkey', synlogin='$synlogin', type='$type', recvnote='$recvnote', extra='$extra', tagtemplates='$tagtemplates'");
+				$this->db->query("INSERT INTO ".UC_DBTABLEPRE."applications SET name='$name', url='$url', ip='$ip',
+					viewprourl='$viewprourl', apifilename='$apifilename', authkey='$authkey', synlogin='$synlogin',
+					type='$type', recvnote='$recvnote', extra='$extra',
+					tagtemplates='$tagtemplates'");
 				$appid = $this->db->insert_id();
 			}
 
@@ -148,6 +151,8 @@ class control extends adminbase {
 			$authkey = $this->authcode($authkey, 'ENCODE', UC_MYKEY);
 			$synlogin = getgpc('synlogin', 'P');
 			$recvnote = getgpc('recvnote', 'P');
+			$extraurl = getgpc('extraurl', 'P');
+			//$allowips = getgpc('allowips', 'P');
 			if(getgpc('apppath', 'P')) {
 				$app['extra']['apppath'] = $this->_realpath(getgpc('apppath', 'P'));
 				if($app['extra']['apppath']) {
@@ -169,7 +174,13 @@ class control extends adminbase {
 			} else {
 				$app['extra']['apppath'] = '';
 			}
-
+			$app['extra']['extraurl'] = array();
+			if($extraurl) {
+				foreach(explode("\n", $extraurl) as $val) {
+					if(!$val = trim($val)) continue;
+					$app['extra']['extraurl'][] = $val;
+				}
+			}
 			$tagtemplates = array();
 			$tagtemplates['template'] = MAGIC_QUOTES_GPC ? stripslashes(getgpc('tagtemplates', 'P')) : getgpc('tagtemplates', 'P');
 			$tagfields = explode("\n", getgpc('tagfields', 'P'));
@@ -183,7 +194,11 @@ class control extends adminbase {
 			$tagtemplates = $this->serialize($tagtemplates, 1);
 
 			$extra = addslashes(serialize($app['extra']));
-			$this->db->query("UPDATE ".UC_DBTABLEPRE."applications SET appid='$appid', name='$name', url='$url', type='$type', ip='$ip', viewprourl='$viewprourl', apifilename='$apifilename', authkey='$authkey', synlogin='$synlogin', recvnote='$recvnote', extra='$extra', tagtemplates='$tagtemplates' WHERE appid='$appid'");
+			$this->db->query("UPDATE ".UC_DBTABLEPRE."applications SET appid='$appid', name='$name', url='$url',
+				type='$type', ip='$ip', viewprourl='$viewprourl', apifilename='$apifilename', authkey='$authkey',
+				synlogin='$synlogin', recvnote='$recvnote', extra='$extra', 
+				tagtemplates='$tagtemplates'
+				WHERE appid='$appid'");
 			$updated = true;
 			$this->load('cache');
 			$_ENV['cache']->updatedata('apps');
@@ -207,6 +222,7 @@ class control extends adminbase {
 		$app = $_ENV['app']->get_app_by_appid($appid);
 		$this->view->assign('isfounder', $this->user['isfounder']);
 		$this->view->assign('appid', $app['appid']);
+		$this->view->assign('allowips', $app['allowips']);
 		$this->view->assign('name', $app['name']);
 		$this->view->assign('url', $app['url']);
 		$this->view->assign('ip', $app['ip']);
@@ -220,11 +236,12 @@ class control extends adminbase {
 		$this->view->assign('dbcharset', $app['dbcharset']);
 		$this->view->assign('type', $app['type']);
 		$this->view->assign('recvnotechecked', $recvnotechecked);
-		$typelist = array('UCHOME'=>'UCenter Home','XSPACE'=>'X-Space','DISCUZ'=>'Discuz!','SUPESITE'=>'SupeSite','SUPEV'=>'SupeV','ECSHOP'=>'ECShop','ECMALL'=>'ECMall','OTHER'=>$this->lang['other']);
+		$typelist = array('DISCUZX'=>'DiscuzX','UCHOME'=>'UCenter Home','XSPACE'=>'X-Space','DISCUZ'=>'Discuz!','SUPESITE'=>'SupeSite','SUPEV'=>'SupeV','ECSHOP'=>'ECShop','ECMALL'=>'ECMall','OTHER'=>$this->lang['other']);
 		$this->view->assign('typelist', $typelist);
 		$this->view->assign('updated', $updated);
 		$addapp = getgpc('addapp');
 		$this->view->assign('addapp', $addapp);
+		$this->view->assign('extraurl', implode("\n", $app['extra']['extraurl']));
 		$this->view->assign('apppath', $app['extra']['apppath']);
 		$this->view->assign('tagtemplates', $tagtemplates);
 		$this->view->display('admin_app');

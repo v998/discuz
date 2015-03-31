@@ -1,44 +1,32 @@
 <?php
 
 /*
-	[UCenter] (C)2001-2099 Comsenz Inc.
+	[Discuz!] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
 	$Id: db.class.php 1059 2011-03-01 07:25:09Z monkey $
 */
 
+if(!defined('IN_COMSENZ')) {
+	exit('Access Denied');
+}
 
-class ucclient_db {
+class dbstuff {
 	var $querynum = 0;
 	var $link;
 	var $histories;
-
-	var $dbhost;
-	var $dbuser;
-	var $dbpw;
-	var $dbcharset;
-	var $pconnect;
-	var $tablepre;
 	var $time;
+	var $tablepre;
 
-	var $goneaway = 5;
-
-	function connect($dbhost, $dbuser, $dbpw, $dbname = '', $dbcharset = '', $pconnect = 0, $tablepre='', $time = 0) {
-		$this->dbhost = $dbhost;
-		$this->dbuser = $dbuser;
-		$this->dbpw = $dbpw;
-		$this->dbname = $dbname;
-		$this->dbcharset = $dbcharset;
-		$this->pconnect = $pconnect;
-		$this->tablepre = $tablepre;
+	function connect($dbhost, $dbuser, $dbpw, $dbname = '', $dbcharset, $pconnect = 0, $tablepre='', $time = 0) {
 		$this->time = $time;
-
+		$this->tablepre = $tablepre;
 		if($pconnect) {
 			if(!$this->link = mysql_pconnect($dbhost, $dbuser, $dbpw)) {
 				$this->halt('Can not connect to MySQL server');
 			}
 		} else {
-			if(!$this->link = mysql_connect($dbhost, $dbuser, $dbpw)) {
+			if(!$this->link = mysql_connect($dbhost, $dbuser, $dbpw, 1)) {
 				$this->halt('Can not connect to MySQL server');
 			}
 		}
@@ -63,23 +51,21 @@ class ucclient_db {
 		return mysql_fetch_array($query, $result_type);
 	}
 
-	function result_first($sql) {
+	function result_first($sql, &$data) {
 		$query = $this->query($sql);
-		return $this->result($query, 0);
+		$data = $this->result($query, 0);
 	}
 
-	function fetch_first($sql) {
+	function fetch_first($sql, &$arr) {
 		$query = $this->query($sql);
-		return $this->fetch_array($query);
+		$arr = $this->fetch_array($query);
 	}
 
-	function fetch_all($sql, $id = '') {
-		$arr = array();
+	function fetch_all($sql, &$arr) {
 		$query = $this->query($sql);
 		while($data = $this->fetch_array($query)) {
-			$id ? $arr[$data[$id]] = $data : $arr[] = $data;
+			$arr[] = $data;
 		}
-		return $arr;
 	}
 
 	function cache_gc() {
@@ -148,24 +134,7 @@ class ucclient_db {
 	}
 
 	function halt($message = '', $sql = '') {
-		$error = mysql_error();
-		$errorno = mysql_errno();
-		if($errorno == 2006 && $this->goneaway-- > 0) {
-			$this->connect($this->dbhost, $this->dbuser, $this->dbpw, $this->dbname, $this->dbcharset, $this->pconnect, $this->tablepre, $this->time);
-			$this->query($sql);
-		} else {
-			$s = '';
-			if($message) {
-				$s = "<b>UCenter info:</b> $message<br />";
-			}
-			if($sql) {
-				$s .= '<b>SQL:</b>'.htmlspecialchars($sql).'<br />';
-			}
-			$s .= '<b>Error:</b>'.$error.'<br />';
-			$s .= '<b>Errno:</b>'.$errorno.'<br />';
-			$s = str_replace(UC_DBTABLEPRE, '[Table]', $s);
-			exit($s);
-		}
+		show_error('run_sql_error', $message.'<br /><br />'.$sql.'<br /> '.mysql_error(), 0);
 	}
 }
 

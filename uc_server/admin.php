@@ -1,14 +1,11 @@
 <?php
 
 /*
-	[UCenter] (C)2001-2009 Comsenz Inc.
+	[UCenter] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
-	$Id: admin.php 962 2009-09-21 02:37:04Z zhaoxiongfei $
+	$Id: admin.php 1059 2011-03-01 07:25:09Z monkey $
 */
-
-define('UC_SERVER_VERSION', '1.5.1');
-define('UC_SERVER_RELEASE', '20091001');
 
 error_reporting(0);
 set_magic_quotes_runtime(0);
@@ -32,16 +29,19 @@ $_SERVER	= daddslashes($_SERVER);
 $_FILES		= daddslashes($_FILES);
 $_REQUEST	= daddslashes($_REQUEST, 1, TRUE);
 
+require UC_ROOT.'./release/release.php';
 require UC_DATADIR.'config.inc.php';
 require UC_ROOT.'model/base.php';
 require UC_ROOT.'model/admin.php';
 
-$m = empty($_REQUEST['m']) ? 'frame' : $_REQUEST['m'];
-$a = empty($_REQUEST['a']) ? 'index' : $_REQUEST['a'];
+$m = getgpc('m');
+$a = getgpc('a');
+$m = empty($m) ? 'frame' : $m;
+$a = empty($a) ? 'index' : $a;
 
 define('RELEASE_ROOT', '');
 
-if(in_array($m, array('admin', 'app', 'badword', 'pm', 'cache', 'db', 'domain', 'frame', 'log', 'note', 'feed', 'mail', 'setting', 'user', 'credit', 'seccode', 'tool', 'plugin'))) {
+if(in_array($m, array('admin', 'app', 'badword', 'cache', 'db', 'domain', 'frame', 'log', 'note', 'feed', 'mail', 'setting', 'user', 'credit', 'seccode', 'tool', 'plugin', 'pm'))) {
 	include UC_ROOT."control/admin/$m.php";
 	$control = new control();
 	$method = 'on'.$a;
@@ -64,7 +64,7 @@ function daddslashes($string, $force = 0, $strip = FALSE) {
 	if(!MAGIC_QUOTES_GPC || $force) {
 		if(is_array($string)) {
 			foreach($string as $key => $val) {
-				$string[$key] = daddslashes($val, $force);
+				$string[$key] = daddslashes($val, $force, $strip);
 			}
 		} else {
 			$string = addslashes($strip ? stripslashes($string) : $string);

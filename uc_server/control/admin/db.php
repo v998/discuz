@@ -58,7 +58,11 @@ class control extends adminbase {
 			$appid = intval(getgpc('appid'));
 			$app = $this->cache['apps'][$appid];
 			$dir = trim(getgpc('dir'));
-			$url = $app['url'].'/api/dbbak.php?apptype='.$app['type'];
+			if($app['type'] == 'DISCUZX') {
+				$url = $app['url'].'/api/db/dbbak.php?apptype='.$app['type'];
+			} else {
+				$url = $app['url'].'/api/dbbak.php?apptype='.$app['type'];
+			}
 			$code = $this->authcode('&method=ping&dir='.$dir.'&time='.time(), 'ENCODE', $app['authkey']);
 			$url .= '&code='.urlencode($code);
 			$res = $_ENV['misc']->dfopen2($url, 0, '', '', 1, $app['ip'], 20, TRUE);
@@ -92,7 +96,11 @@ class control extends adminbase {
 				if(!isset($this->cache['apps'][$appid])) {
 					$this->message($this->_parent_js($appid, 'appid_invalid'));
 				}
-				$url = $app['url'].'/api/dbbak.php?apptype='.$app['type'];
+				if($app['type'] == 'DISCUZX') {
+					$url = $app['url'].'/api/db/dbbak.php?apptype='.$app['type'];
+				} else {
+					$url = $app['url'].'/api/dbbak.php?apptype='.$app['type'];
+				}
 				$code = $this->authcode('&method='.$type.'&sqlpath='.$backupdir.'&time='.time(), 'ENCODE', $app['authkey']);
 			} else {
 				$url = 'http://'.$_SERVER['HTTP_HOST'].str_replace('admin.php', 'api/dbbak.php', $_SERVER['PHP_SELF']).'?apptype=UCENTER';

@@ -1,10 +1,10 @@
 <?php
 
 /*
-	[UCenter] (C)2001-2009 Comsenz Inc.
+	[UCenter] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
-	$Id: note.php 915 2009-01-19 05:55:43Z monkey $
+	$Id: note.php 1059 2011-03-01 07:25:09Z monkey $
 */
 
 !defined('IN_UC') && exit('Access Denied');
@@ -139,7 +139,7 @@ class notemodel {
 		}
 		$this->base->load('misc');
 		$apifilename = isset($app['apifilename']) && $app['apifilename'] ? $app['apifilename'] : 'uc.php';
-		if($app['extra']['apppath'] && @include $app['extra']['apppath'].'./api/'.$apifilename) {
+		if($app['extra']['apppath'] && @include_once $app['extra']['apppath'].'./api/'.$apifilename) {
 			$uc_note = new uc_note();
 			$method = $note['operation'];
 			if(is_string($method) && !empty($method)) {
