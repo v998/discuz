@@ -177,8 +177,9 @@ function discuzcode($message, $smileyoff, $bbcodeoff, $htmlon = 0, $allowsmilies
 			$message = preg_replace("/\[audio\]\s*([^\[\<\r\n]+?)\s*\[\/audio\]/ies", "parseaudio('\\1')", $message);
 		}
 		if($allowmediacode && strpos($msglower, '[/flash]') !== FALSE) {
-			$message = preg_replace("/\[flash\]\s*([^\[\<\r\n]+?)\s*\[\/flash\]/is", "<script type=\"text/javascript\" reload=\"1\">document.write(AC_FL_RunContent('width', '550', 'height', '400', 'allowNetworking', 'internal', 'allowScriptAccess', 'never', 'src', '\\1', 'quality', 'high', 'bgcolor', '#ffffff', 'wmode', 'transparent', 'allowfullscreen', 'true'));</script>", $message);
-		}
+			$message = preg_replace("/\[flash\]\s*([^\[\<\r\n]+?)\s*\[\/flash\]/ies", "parseflash('\\1')", $message);
+        }
+		
 		if($parsetype != 1 && $allowbbcode == 2 && $GLOBALS['_DCACHE']['bbcodes']) {
 			$message = preg_replace($GLOBALS['_DCACHE']['bbcodes']['searcharray'], $GLOBALS['_DCACHE']['bbcodes']['replacearray'], $message);
 		}
@@ -421,6 +422,16 @@ function parseflv($url, $width, $height) {
 
 function parseimg($width, $height, $src) {
 	return bbcodeurl($src, '<img'.($width > 0 ? " width=\"$width\"" : '').($height > 0 ? " height=\"$height\"" : '')." src=\"$src\" border=\"0\" alt=\"\" />");
+}
+
+function parseflash($url) {
+	preg_match("/((https?){1}:\/\/|www\.)[^\[\"']+/i", $url, $matches);
+	$url = $matches[0];
+	$code = '';
+		if($url) {
+			$code = "<script type=\"text/javascript\" reload=\"1\">document.write(AC_FL_RunContent('width', '550', 'height', '400', 'allowNetworking', 'internal', 'allowScriptAccess', 'never', 'src', '$url', 'quality', 'high', 'bgcolor', '#ffffff', 'wmode', 'transparent', 'allowfullscreen', 'true'));</script>";
+		}
+	return $code;
 }
 
 ?>
