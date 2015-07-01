@@ -1439,6 +1439,7 @@ function langeval($array) {
 }
 
 function pluginstat($type, $data) {
+	return; //Disable Comsenz Tracking
 	$url = 'http://stat.discuz.com/plugins.php?action='.$type.'&id='.rawurlencode($data['identifier']).'&version='.rawurlencode($data['version']).'&url='.rawurlencode($GLOBALS['boardurl']).'&ip='.$GLOBALS['onlineip'];
 	echo '<script src="'.$url.'" type="text/JavaScript"></script>';
 }

@@ -1683,6 +1683,7 @@ function transval($template, $data) {
 }
 
 function stat_code($scriptpath = '', $imgcode = 0) {
+	return; //Disable Comsenz Tracking
 	if(!defined('STAT_DISABLED') && STAT_ID > 0 && !IS_ROBOT) {
 		$statserver = 'http://stat.discuz.com/';
 		if(!defined('CACHE_FILE') || $GLOBALS['discuz_uid']) {
@@ -1750,6 +1751,7 @@ function write_statlog($message = '', $query = '', $referer = '', $scriptpath = 
 }
 
 function funcstat($funcinfo = '', $scriptpath = '', $imgcode = 0) {
+	return; //Disable Comsenz Tracking
 	global $_DCACHE, $funcstatinfo;
 	$funcsiteid = $_DCACHE['settings']['funcsiteid'];
 	$funckey = $_DCACHE['settings']['funckey'];

@@ -64,6 +64,7 @@ function bbsinformation() {
 	global $db, $timestamp, $tablepre, $charset, $bbname, $_SERVER, $siteuniqueid, $save_mastermobile, $msn;
 	$update = array('uniqueid' => $siteuniqueid, 'version' => DISCUZ_VERSION, 'release' => DISCUZ_RELEASE, 'php' => PHP_VERSION, 'mysql' => $db->version(), 'charset' => $charset, 'bbname' => $bbname, 'mastermobile' => $save_mastermobile);
 
+	/* Disable Comsenz Tracking
 	$updatetime = @filemtime(DISCUZ_ROOT.'./forumdata/updatetime.lock');
 	if(empty($updatetime) || ($timestamp - $updatetime > 3600 * 4)) {
 		@touch(DISCUZ_ROOT.'./forumdata/updatetime.lock');
@@ -79,6 +80,7 @@ function bbsinformation() {
 			$update['msn_domain'] = $msn['domain'];
 		}
 	}
+	*/
 
 	$data = '';
 	foreach($update as $key => $value) {
