@@ -81,7 +81,7 @@ require_once DISCUZ_ROOT.'./include/db_'.$database.'.class.php';
 $PHP_SELF = dhtmlspecialchars($_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME']);
 $BASESCRIPT = basename($PHP_SELF);
 list($BASEFILENAME) = explode('.', $BASESCRIPT);
-$boardurl = htmlspecialchars('http://'.$_SERVER['HTTP_HOST'].preg_replace("/\/+(api|archiver|wap)?\/*$/i", '', substr($PHP_SELF, 0, strrpos($PHP_SELF, '/'))).'/');
+$boardurl = htmlspecialchars(($_SERVER['HTTPS']==on?'https://':'http://').$_SERVER['HTTP_HOST'].preg_replace("/\/+(api|archiver|wap)?\/*$/i", '', substr($PHP_SELF, 0, strrpos($PHP_SELF, '/'))).'/');
 
 if(getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
 	$onlineip = getenv('HTTP_CLIENT_IP');
